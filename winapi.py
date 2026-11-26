@@ -6,8 +6,10 @@ import os
 import queue
 import shutil
 import subprocess
+import sys
 import threading
 import time
+from contextlib import contextmanager
 from ctypes import wintypes
 from pathlib import Path
 
@@ -63,6 +65,7 @@ _declare(kernel32.GetUserDefaultUILanguage, wintypes.WORD)
 _declare(kernel32.OpenEventW, wintypes.HANDLE, wintypes.DWORD, wintypes.BOOL, wintypes.LPCWSTR)
 _declare(kernel32.SetEvent, wintypes.BOOL, wintypes.HANDLE)
 _declare(kernel32.CloseHandle, wintypes.BOOL, wintypes.HANDLE)
+_declare(kernel32.SetDllDirectoryW, wintypes.BOOL, wintypes.LPCWSTR)
 
 
 def app_in_foreground():
@@ -268,6 +271,26 @@ def _write_json(file, data):
     os.replace(temporary, file)
 
 
+@contextmanager
+def _clean_child_environment():
+    """Keeps the temporary folder of the exe away from the programs started here.
+
+    They would inherit it as a place to load libraries from, and PowerToys keeps running after this
+    program has closed and deleted that folder.
+    """
+    folder = getattr(sys, "_MEIPASS", None)  # set only inside the exe
+    if not folder:
+        yield
+        return
+    saved = {name: os.environ.pop(name) for name in ("TCL_LIBRARY", "TK_LIBRARY") if name in os.environ}
+    kernel32.SetDllDirectoryW(None)
+    try:
+        yield
+    finally:
+        kernel32.SetDllDirectoryW(folder)
+        os.environ.update(saved)
+
+
 def _signal_reload():
     event = kernel32.OpenEventW(0x0002, False, RELOAD_EVENT)  # EVENT_MODIFY_STATE
     if not event:
@@ -328,7 +351,8 @@ class PowerToys:
 
     def _launch(self):
         file = self.executable()
-        os.startfile(file, cwd=str(file.parent))
+        with _clean_child_environment():
+            os.startfile(file, cwd=str(file.parent))
 
     def apply(self, keymap):
         """Writes the mapping and makes it active. Raises PlatformError if it cannot."""

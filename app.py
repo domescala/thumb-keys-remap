@@ -20,7 +20,10 @@ except ImportError:
     ctypes.windll.user32.MessageBoxW(None, _t("error.pillow_missing"), _t("app_title"), 0x10)
     sys.exit(1)
 
-CONFIG_FILE = Path(__file__).resolve().parent / "configurations.json"
+# The exe unpacks its code into a temporary folder: the profiles must stay next to the exe.
+PROGRAM = sys.executable if getattr(sys, "frozen", False) else __file__
+CONFIG_FILE = Path(PROGRAM).resolve().parent / "configurations.json"
+ICON_FILE = Path(__file__).resolve().parent / "assets" / "icon.ico"  # packed inside the exe
 
 MODIFIERS = {m.WIN, m.WIN_RIGHT, m.ALT, m.ALT_RIGHT, m.CTRL, m.CTRL_RIGHT, m.SHIFT, m.SHIFT_RIGHT}
 TARGET_TEXTS = ("target.windows", "target.alt", "target.ctrl")  # what positions 1, 2 and 3 become
@@ -796,6 +799,7 @@ def main():
         pass
     root = tk.Tk()
     root.withdraw()
+    root.iconbitmap(default=str(ICON_FILE))  # also used by the dialogs
     translator = i18n.Translator(winapi.system_language())
     try:
         store = m.ConfigStore(CONFIG_FILE, winapi.altgr_keys())

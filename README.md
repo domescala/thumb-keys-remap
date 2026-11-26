@@ -53,7 +53,7 @@ The mapping is applied through the Windows PowerToys Keyboard Manager and can be
 
 ## Installation
 
-You need **Windows 11** with **Python 3**.
+You need **Windows 11**.
 
 ### 1️⃣ Install PowerToys
 
@@ -61,15 +61,47 @@ You need **Windows 11** with **Python 3**.
 winget install --id Microsoft.PowerToys
 ```
 
-### 2️⃣ Download the project and install Pillow
+### 2️⃣ Download and run Thumb keys remap
+
+#### Using the executable
+
+Download **`ThumbKeysRemap.exe`** from the [latest release](https://github.com/domescala/thumb-keys-remap/releases/latest) and open it. There is nothing to install: Python is not needed.
+
+- Put it in a folder you can write to (not `Program Files`): your profiles are saved next to it, in `configurations.json`.
+- To update, replace the exe and keep `configurations.json`.
+
+> [!NOTE]
+> The exe is not signed: if the Windows SmartScreen warning appears, press `More info` and then `Run anyway`.
+
+---
+
+#### Using the terminal
+
+> [!NOTE]
+> Python 3 is required.
+
+##### Download the repository
+
+With git:
 
 ```powershell
 git clone https://github.com/domescala/thumb-keys-remap.git
+```
+
+Or download the [ZIP](https://github.com/domescala/thumb-keys-remap/archive/refs/heads/main.zip) and extract it.
+
+##### Install Pillow
+
+In the terminal, move into the folder and install Pillow:
+
+```powershell
 cd thumb-keys-remap
 python -m pip install pillow
 ```
 
-### 3️⃣ Run
+If you downloaded the ZIP, the folder is named `thumb-keys-remap-main`.
+
+##### Run
 
 ```powershell
 python app.py
@@ -77,7 +109,9 @@ python app.py
 
 Use `pythonw app.py` to open it without the terminal window.
 
-### 4️⃣ Activate
+---
+
+### 3️⃣ Activate
 
 Press `Activate` next to **Mac-like**. Keyboard Manager is turned on automatically if it was off.
 
@@ -188,18 +222,34 @@ The texts are in the files in `locales/`:
 - **to add a language**: copy `en.json` (for example to `fr.json`) and translate it;
 - leave the parts in braces, such as `{key}`, as they are. A missing text is shown in English.
 
+The texts are built into the exe: to change them, run the program [from the terminal](#using-the-terminal) or build the exe again.
+
+<br/>
+
+## Build the exe
+
+You need **Python 3**. From the project folder:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File build.ps1
+```
+
+The result is `dist\ThumbKeysRemap.exe`. The script downloads Pillow and PyInstaller into a separate environment inside `build/`, so the first run needs an Internet connection.
+
 <br/>
 
 ## Files and saving
 
-| File                  | What it contains                                                   |
-| --------------------- | ------------------------------------------------------------------ |
-| `app.py`              | The window                                                         |
-| `mapping.py`          | Keys, profiles and conversion to the PowerToys format              |
-| `winapi.py`           | Keyboard reading, layout and PowerToys                             |
-| `widgets.py`          | Buttons, panels and drawn keyboards                                |
-| `i18n.py`, `locales/` | Translations                                                       |
-| `configurations.json` | Your profiles and language: created by the program, ignored by git |
+| File                  | What it contains                                                        |
+| --------------------- | ----------------------------------------------------------------------- |
+| `app.py`              | The window                                                              |
+| `mapping.py`          | Keys, profiles and conversion to the PowerToys format                   |
+| `winapi.py`           | Keyboard reading, layout and PowerToys                                  |
+| `widgets.py`          | Buttons, panels and drawn keyboards                                     |
+| `i18n.py`, `locales/` | Translations                                                            |
+| `assets/`             | The program icon                                                        |
+| `build.ps1`           | Builds the exe                                                          |
+| `configurations.json` | Your profiles and language: created next to the program, ignored by git |
 
 <br/>
 
