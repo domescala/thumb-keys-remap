@@ -19,6 +19,15 @@ The mapping is applied through the Windows PowerToys Keyboard Manager and can be
 
 <br/>
 
+## Screenshots
+
+<table><tr>
+    <td><img src="docs/screenshot-1.png" alt="Thumb keys remap cover" width="100%" /></td>
+     <td><img src="docs/screenshot-2.png" alt="Thumb keys remap cover" width="100%" /></td>
+  </tr>
+</table>
+
+
 ## Contents
 
 <table>

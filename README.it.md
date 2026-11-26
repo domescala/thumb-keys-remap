@@ -18,6 +18,15 @@ La mappatura si applica tramite PowerToys Keyboard Manager di Windows, si può a
 
 <br/>
 
+## Screenshots
+
+<table><tr>
+    <td><img src="docs/screenshot-1.png" alt="Thumb keys remap cover" width="100%" /></td>
+     <td><img src="docs/screenshot-2.png" alt="Thumb keys remap cover" width="100%" /></td>
+  </tr>
+</table>
+
+
 ## Contenuto
 
 <table>
