@@ -1,11 +1,11 @@
 [![badge](https://shieldcn.dev/badge/LEGGI%20IN%20ITALIANO-f6bf3b.svg?logo=lu%3ALanguages)](./README.it.md)
 
 <div align="center">
-<img src="cover.webp" alt="Thumb keys remap cover" width="100%" />
+<img src="cover.webp" alt="Mac-like Keyboard Remap for Windows cover" width="100%" />
 <br/>
 <br/>
 
-# Thumb keys remap
+# Mac-like Keyboard Remap for Windows
 
 **Remap the <kbd>WIN</kbd> <kbd>ALT</kbd> <kbd>CTRL</kbd> keys on Windows to match the Mac layout.**
 The mapping is applied through the Windows PowerToys Keyboard Manager and can be turned on or off at any time, without restarting.
@@ -22,8 +22,8 @@ The mapping is applied through the Windows PowerToys Keyboard Manager and can be
 ## Screenshots
 
 <table><tr>
-    <td><img src="docs/screenshot-1.png" alt="Thumb keys remap cover" width="100%" /></td>
-     <td><img src="docs/screenshot-2.png" alt="Thumb keys remap cover" width="100%" /></td>
+    <td><img src="docs/screenshot-1.png" alt="Screenshot 1" width="100%" /></td>
+     <td><img src="docs/screenshot-2.png" alt="Screenshot 2" width="100%" /></td>
   </tr>
 </table>
 
@@ -70,11 +70,11 @@ You need **Windows 11**.
 winget install --id Microsoft.PowerToys
 ```
 
-### 2️⃣ Download and run Thumb keys remap
+### 2️⃣ Download and run the app
 
 #### Using the executable
 
-Download **`ThumbKeysRemap.exe`** from the [latest release](https://github.com/domescala/thumb-keys-remap/releases/latest) and open it. There is nothing to install: Python is not needed.
+Download **`MacLikeKeyboard.exe`** from the [latest release](https://github.com/domescala/windows-mac-like-keyboard-remap/releases/latest) and open it. There is nothing to install: Python is not needed.
 
 - Put it in a folder you can write to (not `Program Files`): your profiles are saved next to it, in `configurations.json`.
 - To update, replace the exe and keep `configurations.json`.
@@ -94,21 +94,21 @@ Download **`ThumbKeysRemap.exe`** from the [latest release](https://github.com/d
 With git:
 
 ```powershell
-git clone https://github.com/domescala/thumb-keys-remap.git
+git clone https://github.com/domescala/windows-mac-like-keyboard-remap.git
 ```
 
-Or download the [ZIP](https://github.com/domescala/thumb-keys-remap/archive/refs/heads/main.zip) and extract it.
+Or download the [ZIP](https://github.com/domescala/windows-mac-like-keyboard-remap/archive/refs/heads/main.zip) and extract it.
 
 ##### Install Pillow
 
 In the terminal, move into the folder and install Pillow:
 
 ```powershell
-cd thumb-keys-remap
+cd windows-mac-like-keyboard-remap
 python -m pip install pillow
 ```
 
-If you downloaded the ZIP, the folder is named `thumb-keys-remap-main`.
+If you downloaded the ZIP, the folder is named `windows-mac-like-keyboard-remap-main`.
 
 ##### Run
 
@@ -243,7 +243,7 @@ You need **Python 3**. From the project folder:
 powershell -ExecutionPolicy Bypass -File build.ps1
 ```
 
-The result is `dist\ThumbKeysRemap.exe`. The script downloads Pillow and PyInstaller into a separate environment inside `build/`, so the first run needs an Internet connection.
+The result is `dist\MacLikeKeyboard.exe`. The script downloads Pillow and PyInstaller into a separate environment inside `build/`, so the first run needs an Internet connection.
 
 <br/>
 
@@ -268,6 +268,11 @@ The result is `dist\ThumbKeysRemap.exe`. The script downloads Pillow and PyInsta
 - The <kbd>Fn</kbd> key cannot be remapped.
 - In windows running as administrator, the mapping works only if PowerToys is also run as administrator.
 - On the Windows sign-in screen the keys keep their original functions.
+
+<br/>
+
+> [!NOTE]
+> If you only want to remap the CTRL-ALT keys as on a Mac, this is a good alternative to AutoHotkey (AHK) scripts and SharpKeys: no scripting or registry editing needed. The mapping is handled by Microsoft's PowerToys Keyboard Manager. Unlike SharpKeys, you don't need to restart after each change.
 
 <br/>
 

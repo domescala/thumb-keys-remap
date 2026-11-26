@@ -1,4 +1,4 @@
-# Builds dist\ThumbKeysRemap.exe: a single file that runs without Python installed.
+# Builds dist\MacLikeKeyboard.exe: a single file that runs without Python installed.
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
 
@@ -16,7 +16,7 @@ Invoke-Step $python @("-m", "pip", "install", "--quiet", "pillow", "pyinstaller"
 # The name must not start with "PowerToys": the program closes every process whose name does.
 Invoke-Step $python @(
     "-m", "PyInstaller", "--noconfirm", "--clean", "--onefile", "--windowed",
-    "--name", "ThumbKeysRemap",
+    "--name", "MacLikeKeyboard",
     "--add-data", "$PSScriptRoot\locales;locales",
     "--add-data", "$PSScriptRoot\assets\icon.ico;assets",
     "--icon", "$PSScriptRoot\assets\icon.ico",
