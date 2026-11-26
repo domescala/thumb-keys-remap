@@ -63,8 +63,8 @@ winget install --id Microsoft.PowerToys
 ### 2️⃣ Scarica il progetto e installa Pillow
 
 ```powershell
-git clone https://github.com/domescala/windows-keyboard-macos-like.git
-cd windows-keyboard-macos-like
+git clone https://github.com/domescala/thumb-keys-remap.git
+cd thumb-keys-remap
 python -m pip install pillow
 ```
 
